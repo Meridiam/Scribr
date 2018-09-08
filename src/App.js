@@ -27,8 +27,8 @@ class App extends Component {
         data.append('audio', blob, 'audio.opus');
 
         axios.create ({
-          baseURL: 'https://scribr-backend.herokuapp.com/transcribe',
-          timeout: 10000}).post(`/files`, data, {
+          baseURL: 'https://scribr-backend.herokuapp.com',
+          timeout: 10000}).post(`/transcribe`, data, {
             headers: {
             'Content-Type': `multipart/form-data;
             boundary = ${data._boundary}`,
