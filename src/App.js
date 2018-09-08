@@ -24,6 +24,13 @@ class App extends Component {
         document.body.appendChild(audioPlayer); 
 
         //USE AXIOS TO SEND POST REQUEST TO SERVER WITH BLOB AS PART OF A FORM (LOOK IT UP)
+        var fd = new FormData();
+        fd.append('audio', blob, 'audio.ogg');
+
+        fetch('https://scribr-backend.herokuapp.com/transcribe', {
+          method: 'post',
+          body: fd
+        });
       }
 
     this.mr.start();
