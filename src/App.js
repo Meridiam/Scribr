@@ -25,12 +25,12 @@ class App extends Component {
 
         //USE AXIOS TO SEND POST REQUEST TO SERVER WITH BLOB AS PART OF A FORM (LOOK IT UP)
         var fd = new FormData();
-        fd.append('audio', blob, 'audio.ogg');
+        fd.append('audio', blob, 'audio.opus');
 
-        fetch('https://scribr-backend.herokuapp.com/transcribe', {
-          method: 'post',
-          body: fd
-        });
+        fetch('scribr-backend.herokuapp.com/transcribe', {
+          method: 'POST',
+          data: fd
+        }).catch(err => alert(err))
       }
 
     this.mr.start();
