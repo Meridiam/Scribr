@@ -6,7 +6,7 @@ import './App.css';
 class App extends Component {
   constructor() {
     super();
-    this.state = {transcript: "", recording: false};
+    this.state = {transcript: "", recording: false, parts: []};
   }
 
   handleRecord() {
@@ -44,35 +44,12 @@ class App extends Component {
           })
           .then(response => {
             console.log(response.data);
-            this.setState({transcript: response.data["transcript"]});
+            this.setState({transcript: response.data["transcript"], recording: this.state.recording, parts: response.data["transcript"].split('\n')});
           });
-          
-          let blobURL = window.URL.createObjectURL(blob);
-          var audioPlayer = document.createElement("AUDIO");
-          audioPlayer.src = blobURL;      
-          audioPlayer.setAttribute("id", "player");
-          audioPlayer.setAttribute("controls", "controls");
-          document.body.appendChild(audioPlayer);
-  
-  
-         // var myBlob = new Blob(["This is my blob content"], {type : "text/plain"});
-          //USE AXIOS TO SEND POST REQUEST TO SERVER WITH BLOB AS PART OF A FORM (LOOK IT UP)
-       //   var fd = new FormData();
-  
-  
-          //fd.append('audio', blob, 'audio.opus');
-  
-  
-          // fetch('https://scribr-backend.herokuapp.com/transcribe', {
-          //   method: 'post',
-          //   data: fd
-          // }).then(function() {
-          //   console.log('done');
-          // }).catch(err => alert(err))
         }
   
       this.mr.start();
-      this.setState({transcript: this.state.transcript, recording: true})
+      this.setState({transcript: this.state.transcript, recording: true, parts: this.state.parts})
       });
     }
   }
@@ -80,7 +57,7 @@ class App extends Component {
   handleStop() {
     if (this.state.recording) {
       this.mr.stop();
-      this.setState({transcript: this.state.transcript, recording: false})
+      this.setState({transcript: this.state.transcript, recording: false, parts: this.state.parts})
     }
   }
 
@@ -89,14 +66,66 @@ class App extends Component {
       <div className="App">
         <header className="App-header">
           <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Welcome to React</h1>
+          <h1 className="App-title">Scribr</h1>
         </header>
-        <button onClick={this.handleRecord.bind(this)}>start</button>
-        <button onClick={this.handleStop.bind(this)}>end</button>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
-        <p>{this.state.transcript}</p>
+        <div className="container" id="button-container">
+          <button id="sbtn" className="btn btn-success" type="button" onClick={this.handleRecord.bind(this)}>start</button>
+          <button id="tbtn" className="btn btn-danger" type="button" onClick={this.handleStop.bind(this)}>end</button>
+        </div>
+        <div className="container" id="form-container">
+          <form>
+            <div className="form-row">
+              <div className="form-group col-md-6">
+                <input value={this.state.parts[1]} type="email" className="form-control" id="name" aria-describedby="emailHelp" placeholder="Name"/>
+              </div>
+              <div className="form-group col-md-6">
+                <input value={this.state.parts[3]} type="email" className="form-control" id="sex" aria-describedby="emailHelp" placeholder="Sex"/>
+              </div>
+            </div>
+            <div className="form-row">
+              <div className="form-group col-md-6">
+                <input value={this.state.parts[5]} type="email" className="form-control" id="age" aria-describedby="emailHelp" placeholder="Age"/>
+              </div>
+              <div className="form-group col-md-6">
+                <input value={this.state.parts[7]} type="email" className="form-control" id="dob" aria-describedby="emailHelp" placeholder="Date of Birth"/>
+              </div>
+            </div>
+            <div className="form-row">
+              <div className="form-group col-md-6">
+                <input value={this.state.parts[9]} type="email" className="form-control" id="height" aria-describedby="emailHelp" placeholder="Height"/>
+              </div>
+              <div className="form-group col-md-6">
+                <input value={this.state.parts[11]} type="email" className="form-control" id="weight" aria-describedby="emailHelp" placeholder="Weight"/>
+              </div>
+            </div>
+            <div className="form-row">
+              <div className="form-group col-md-6">
+                <textarea value={this.state.parts[13]} class="form-control" id="symptoms" rows="3" placeholder="Symptoms"></textarea>
+              </div>
+              <div className="form-group col-md-6">
+                <textarea value={this.state.parts[15]} class="form-control" id="locations" rows="3" placeholder="Locations"></textarea>
+              </div>
+            </div>
+            <div className="form-row">
+              <div className="form-group col-md-6">
+                <textarea value={this.state.parts[17]} class="form-control" id="history" rows="3" placeholder="Pertinent medical history"></textarea>
+              </div>
+              <div className="form-group col-md-6">
+                <textarea value={this.state.parts[19]} class="form-control" id="meds" rows="3" placeholder="Medications"></textarea>
+              </div>
+            </div>
+            <div className="form-row">
+              <div className="form-group col-md-12">
+                <textarea value={this.state.parts[21]} class="form-control" id="diagnosis" rows="3" placeholder="Diagnosis"></textarea>
+              </div>
+            </div>
+            <div className="form-row">
+              <div className="form-group col-md-12">
+                <textarea value={this.state.parts[23]} class="form-control" id="narrative" rows="3" placeholder="Narrative"></textarea>
+              </div>
+            </div>
+          </form>
+        </div>
       </div>
     );
   }

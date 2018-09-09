@@ -26,3 +26,19 @@
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
 }
+
+#form-container {
+  padding-top: 25px;
+}
+
+#button-container {
+  padding-top: 25px;
+}
+
+#sbtn {
+  margin-right: 5px;
+}
+
+#tbtn {
+  margin-left: 5px;
+}
