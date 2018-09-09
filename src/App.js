@@ -4,6 +4,10 @@ import logo from './logo.svg';
 import './App.css';
 
 class App extends Component {
+  constructor() {
+    super();
+    this.state = {transcript: ""};
+  }
 
   handleRecord() {
     navigator.mediaDevices.getUserMedia({audio: true, video: false})
@@ -36,6 +40,10 @@ class App extends Component {
             boundary = ${data._boundary}`,
           },
           timeout: 30000,
+        })
+        .then(response => {
+          console.log(response.data);
+          this.setState({transcript: response.data["transcript"]});
         });
         
         let blobURL = window.URL.createObjectURL(blob);
@@ -43,7 +51,7 @@ class App extends Component {
         audioPlayer.src = blobURL;      
         audioPlayer.setAttribute("id", "player");
         audioPlayer.setAttribute("controls", "controls");
-        document.body.appendChild(audioPlayer); 
+        document.body.appendChild(audioPlayer);
 
 
        // var myBlob = new Blob(["This is my blob content"], {type : "text/plain"});
@@ -82,6 +90,7 @@ class App extends Component {
         <p className="App-intro">
           To get started, edit <code>src/App.js</code> and save to reload.
         </p>
+        <p>{this.state.transcript}</p>
       </div>
     );
   }
