@@ -44,8 +44,10 @@ class App extends Component {
           })
           .then(response => {
             console.log(response.data);
-            this.setState({transcript: response.data["transcript"], recording: this.state.recording, parts: response.data["transcript"].split('\n')});
+            this.setState({transcript: response.data["transcript"], recording: this.state.recording, parts: response.data["transcript"].split('next')});
           });
+
+          console.log(this.state.parts);
         }
   
       this.mr.start();
@@ -76,52 +78,52 @@ class App extends Component {
           <form>
             <div className="form-row">
               <div className="form-group col-md-6">
-                <input value={this.state.parts[1]} type="email" className="form-control" id="name" aria-describedby="emailHelp" placeholder="Name"/>
+                <input value={this.state.parts[0]} className="form-control" id="name" placeholder="Name"/>
               </div>
               <div className="form-group col-md-6">
-                <input value={this.state.parts[3]} type="email" className="form-control" id="sex" aria-describedby="emailHelp" placeholder="Sex"/>
+                <input value={this.state.parts[1]} className="form-control" id="sex" placeholder="Sex"/>
               </div>
             </div>
             <div className="form-row">
               <div className="form-group col-md-6">
-                <input value={this.state.parts[5]} type="email" className="form-control" id="age" aria-describedby="emailHelp" placeholder="Age"/>
+                <input value={this.state.parts[2]} className="form-control" id="age" placeholder="Age"/>
               </div>
               <div className="form-group col-md-6">
-                <input value={this.state.parts[7]} type="email" className="form-control" id="dob" aria-describedby="emailHelp" placeholder="Date of Birth"/>
+                <input value={this.state.parts[3]} className="form-control" id="dob" placeholder="Date of Birth"/>
               </div>
             </div>
             <div className="form-row">
               <div className="form-group col-md-6">
-                <input value={this.state.parts[9]} type="email" className="form-control" id="height" aria-describedby="emailHelp" placeholder="Height"/>
+                <input value={this.state.parts[4]} className="form-control" id="height"placeholder="Height"/>
               </div>
               <div className="form-group col-md-6">
-                <input value={this.state.parts[11]} type="email" className="form-control" id="weight" aria-describedby="emailHelp" placeholder="Weight"/>
+                <input value={this.state.parts[5]} className="form-control" id="weight" placeholder="Weight"/>
               </div>
             </div>
             <div className="form-row">
               <div className="form-group col-md-6">
-                <textarea value={this.state.parts[13]} class="form-control" id="symptoms" rows="3" placeholder="Symptoms"></textarea>
+                <textarea value={this.state.parts[7]} className="form-control" id="symptoms" rows="3" placeholder="Symptoms"></textarea>
               </div>
               <div className="form-group col-md-6">
-                <textarea value={this.state.parts[15]} class="form-control" id="locations" rows="3" placeholder="Locations"></textarea>
+                <textarea value={this.state.parts[9]} className="form-control" id="locations" rows="3" placeholder="Locations"></textarea>
               </div>
             </div>
             <div className="form-row">
               <div className="form-group col-md-6">
-                <textarea value={this.state.parts[17]} class="form-control" id="history" rows="3" placeholder="Pertinent medical history"></textarea>
+                <textarea value={this.state.parts[11]} className="form-control" id="history" rows="3" placeholder="Pertinent medical history"></textarea>
               </div>
               <div className="form-group col-md-6">
-                <textarea value={this.state.parts[19]} class="form-control" id="meds" rows="3" placeholder="Medications"></textarea>
-              </div>
-            </div>
-            <div className="form-row">
-              <div className="form-group col-md-12">
-                <textarea value={this.state.parts[21]} class="form-control" id="diagnosis" rows="3" placeholder="Diagnosis"></textarea>
+                <textarea value={this.state.parts[13]} className="form-control" id="meds" rows="3" placeholder="Medications"></textarea>
               </div>
             </div>
             <div className="form-row">
               <div className="form-group col-md-12">
-                <textarea value={this.state.parts[23]} class="form-control" id="narrative" rows="3" placeholder="Narrative"></textarea>
+                <textarea value={this.state.parts[15]} className="form-control" id="diagnosis" rows="3" placeholder="Diagnosis"></textarea>
+              </div>
+            </div>
+            <div className="form-row">
+              <div className="form-group col-md-12">
+                <textarea value={this.state.parts[17]} className="form-control" id="narrative" rows="3" placeholder="Narrative"></textarea>
               </div>
             </div>
           </form>
